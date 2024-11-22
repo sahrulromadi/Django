@@ -2,7 +2,7 @@
 
 # 2. Membuat Virtual Environment
 
-python -m venv venv
+python -m venv myenv
 
 venv\Scripts\activate
 

@@ -34,7 +34,7 @@ def index(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('accounts/', include('accounts.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

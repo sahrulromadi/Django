@@ -1,0 +1,22 @@
+<!-- templates/account/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Custom Login Page</h1>
+
+    <!-- Form Login -->
+    <form method="post" action="{% url 'account_login' %}">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Login</button>
+    </form>
+
+    <p>
+      Belum punya akun? <a href="{% url 'account_signup' %}">Daftar di sini</a>
+    </p>
+  </body>
+</html>

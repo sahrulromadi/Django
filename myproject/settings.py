@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts'
+    'accounts',
+    'django.contrib.sites',      # Dibutuhkan oleh Allauth
+
+    # Aplikasi Allauth
+    'allauth',
+    'allauth.account',
+    
 ]
 
 MIDDLEWARE = [
@@ -49,6 +55,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+     # Tambahkan middleware Allauth Account
+    'allauth.account.middleware.AccountMiddleware',  # Pastikan middleware ini ada di sini
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -129,3 +138,22 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Autentikasi Backend
+AUTHENTICATION_BACKENDS = [
+    # Django Allauth
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# Email yang dibutuhkan untuk login
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False  # Opsional
+ACCOUNT_AUTHENTICATED_REMEMBER = True  # Opsional
+LOGIN_REDIRECT_URL = '/'  # Arahkan ke halaman utama setelah login
+
+# Google login
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1081505325660-hdvj928tobt77g2u0oc2cd05hmakkmdn.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+SITE_ID = 1

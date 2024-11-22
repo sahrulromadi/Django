@@ -8,7 +8,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Login otomatis setelah registrasi
-            return redirect('home')  # Redirect ke halaman home
+            return redirect('index')  # Redirect ke halaman home
     else:
         form = CustomUserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})
@@ -20,7 +20,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('index')
         else:
             return render(request, 'accounts/login.html', {'error': 'Username atau password salah.'})
     return render(request, 'accounts/login.html')

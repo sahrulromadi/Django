@@ -7,10 +7,17 @@
   </head>
   <body>
     <h1>Daftar URL</h1>
+
+    <!-- Menampilkan link Register atau Login berdasarkan status login pengguna -->
+    {% if user.is_authenticated %}
+    <p>Selamat datang, {{ user.username }}!</p>
+    <a href="{% url 'account_logout' %}">Logout</a>
+    {% else %}
     <ul>
-      <li><a href="{% url 'register' %}">Register</a></li>
-      <li><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="{% url 'account_signup' %}">Register</a></li>
+      <li><a href="{% url 'account_login' %}">Login</a></li>
     </ul>
+    {% endif %}
 
     <h2>Daftar Akun yang Terdaftar</h2>
     <ul>
