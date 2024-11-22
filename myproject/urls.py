@@ -15,8 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+# file handler untuk media
+from django.conf import settings
+from django.conf.urls.static import static
+from accounts.models import CustomUser
+from django.shortcuts import render
+
+# manggil views tanpa app
+# Update fungsi index_view untuk mengambil data user
+def index(request):
+    # Ambil semua user yang terdaftar
+    users = CustomUser.objects.all()
+    # Kirim data user ke template
+    return render(request, 'home/index.html', {'users': users})
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index, name='index'),
+    path('accounts/', include('accounts.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <h1>Daftar URL</h1>
+    <ul>
+      <li><a href="{% url 'register' %}">Register</a></li>
+      <li><a href="{% url 'login' %}">Login</a></li>
+    </ul>
+
+    <h2>Daftar Akun yang Terdaftar</h2>
+    <ul>
+      <!-- Loop melalui setiap user yang sudah didaftarkan -->
+      {% for user in users %}
+      <li>
+        <strong>Username:</strong> {{ user.username }}<br />
+        <strong>Email:</strong> {{ user.email }}<br />
+        <strong>Age:</strong> {{ user.age }}<br />
+        <!-- Cek apakah user memiliki foto profil -->
+        {% if user.profile_picture %}
+        <img
+          src="{{ user.profile_picture.url }}"
+          alt="Foto Profil {{ user.username }}"
+          width="150"
+          height="150"
+        />
+        {% else %}
+        <p>Tidak ada foto profil.</p>
+        {% endif %}
+      </li>
+      <hr />
+      {% empty %}
+      <li>Tidak ada akun yang terdaftar.</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
